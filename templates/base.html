@@ -28,22 +28,32 @@
                     <a class="nav-link active" aria-current="page" href="#">ГЛАВНАЯ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">КВИЗЫ</a>
+                    <a class="nav-link" href="/">КВИЗЫ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">ТЕМАТИЧЕСКИЕ</a>
+                    <a class="nav-link" href="/">ТЕМАТИЧЕСКИЕ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">ЛОГИКА</a>
+                    <a class="nav-link" href="/">ЛОГИКА</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">КИНО</a>
+                    <a class="nav-link" href="/">КИНО</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">ОБРАТНАЯ СВЯЗЬ</a>
+                    <a class="nav-link" href="/">ОБРАТНАЯ СВЯЗЬ</a>
                   </li>
                 </ul>
               </div>
+              {% if current_user.is_authenticated %}
+                  <div class="user_name__wrapper">
+                    <a class="nav-link user_name" href="/logout">{{ current_user.name }}</a>
+                  </div>
+              {% else %}
+                  <div class="form__btns">
+                      <a class="btn btn-primary form__btn" href="/register">Зарегистрироваться</a>
+                      <a class="btn btn-success form__btn" href="/login">Войти</a>
+                  </div>
+              {% endif %}
           </div>
         </nav>
       </header>
@@ -54,10 +64,10 @@
       </main>
     </div>
     <div class="footer">
-      <footer class="bg-light text-center text-lg-start">
+      <footer class="text-center text-lg-start">
         <div class="text-center p-3">
           © 2020 Copyright:
-          <a class="text-dark" href="https://yandexlyceum.ru/">Яндекс.Лицей</a>
+          <a href="https://yandexlyceum.ru/">Яндекс.Лицей</a>
         </div>
       </footer>
     </div>
