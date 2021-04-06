@@ -1,6 +1,8 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from data import db_session
 from data.users import User
+from data.quizes import Quiz
+from data.questions import Question
 from forms.user import RegisterForm
 from forms.login_form import LoginForm
 from flask_login import LoginManager, login_user, login_required, logout_user
@@ -58,13 +60,41 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
-            print(form.remember_me.data)
             login_user(user, remember=True)
             return redirect("/")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/quiz/<int:id>', methods=['GET', 'POST'])
+def quiz(id):
+    db_sess = db_session.create_session()
+    quiz = db_sess.query(Quiz).filter(Quiz.id == id).first()
+    print(quiz.get_current_question_index())
+    questions_id = list(map(int, quiz.questions.split("~")))
+    if request.method == 'GET':
+        current_question_id = questions_id[quiz.get_current_question_index()]
+        current_question = db_sess.query(Question).filter(Question.id == current_question_id).first()
+        question_answers = current_question.answers.split("~")
+        return render_template('quiz.html', number_of_question=quiz.get_current_question_index() + 1,
+                               count_of_questions=len(questions_id), question=current_question,
+                               answers=question_answers)
+    elif request.method == 'POST':
+        quiz.get_next_question_index()
+        response = quiz.get_current_question_index()
+        if response >= len(questions_id):
+            return "Flask"
+        else:
+            current_question_id = questions_id[quiz.get_current_question_index()]
+            current_question = db_sess.query(Question).filter(
+                Question.id == current_question_id).first()
+            question_answers = current_question.answers.split("~")
+            return render_template('quiz.html',
+                                   number_of_question=quiz.get_current_question_index() + 1,
+                                   count_of_questions=len(questions_id), question=current_question,
+                                   answers=question_answers)
 
 
 @app.route('/logout')

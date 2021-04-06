@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="main_block">
+	<div class="container">
+		<div class="main_block__content">
+			<div class="main_block__form">
+				<form method="post" enctype="multipart/form-data">
+					<div class="main_block__count__questions">
+						Вопрос {{ number_of_question }} из {{ count_of_questions }}
+					</div>
+					<div class="main_block__title">
+						{{ question.question }}
+					</div>
+					<div class="main_block__image">
+						<img src="{{ question.image }}">
+					</div>
+					<div class="main_block__answers__list">
+						{% for answer in answers %}
+							<input type="radio" name="answers">
+							<label>{{ answer }}</label>
+						{% endfor %}
+					</div>
+					<div class="main_block__btn">
+						<button type="submit">Ответить</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
