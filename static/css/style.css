@@ -42,6 +42,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 body {
 	position: relative;
 	height: 100%;
+	width: 100%;
 }
 
 .wrapper {
@@ -332,4 +333,52 @@ footer a {
 .user_name:hover {
 	border-bottom: 1px solid #FFE400;
 	color:  #FFE400;
+}
+
+/*quiz__main_block*/
+
+.main_block__container {
+}
+
+.main_block {
+	padding-top: 225px;
+	margin-bottom: 350px;
+}
+
+.main_block__content {
+	text-align: center;
+}
+
+.main_block__count__questions {
+	color: #ffffff;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.main_block__title {
+	color: #ffffff;
+	font-size: 36px;
+	margin-bottom: 30px;
+}
+
+.main_block__answers__list {
+	text-align: left;
+	margin-top: 50px;
+	background-color: #3749e9;
+	min-width: 480px;
+	padding: 10px;
+	border-radius: 10px 10px 0px 0px;
+	display: inline-block;
+}
+.main_block__answer {
+	color: #ffffff;
+	font-size: 16px;
+	padding: 5px 0px 5px 0px;
+}
+
+.main_block__btn button {
+	display: block;
+	text-align: center;
+	margin: 0px auto;
+	width: 480px;
 }

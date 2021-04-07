@@ -17,6 +17,8 @@ app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+current_question = 0
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -70,30 +72,32 @@ def login():
 
 @app.route('/quiz/<int:id>', methods=['GET', 'POST'])
 def quiz(id):
+    global current_question
     db_sess = db_session.create_session()
     quiz = db_sess.query(Quiz).filter(Quiz.id == id).first()
-    print(quiz.get_current_question_index())
     questions_id = list(map(int, quiz.questions.split("~")))
     if request.method == 'GET':
-        current_question_id = questions_id[quiz.get_current_question_index()]
-        current_question = db_sess.query(Question).filter(Question.id == current_question_id).first()
-        question_answers = current_question.answers.split("~")
-        return render_template('quiz.html', number_of_question=quiz.get_current_question_index() + 1,
-                               count_of_questions=len(questions_id), question=current_question,
+        current_question_id = questions_id[current_question]
+        question = db_sess.query(Question).filter(Question.id == current_question_id).first()
+        question_answers = question.answers.split("~")
+        return render_template('quiz.html', number_of_question=current_question + 1,
+                               count_of_questions=len(questions_id), question=question,
                                answers=question_answers)
     elif request.method == 'POST':
-        quiz.get_next_question_index()
-        response = quiz.get_current_question_index()
-        if response >= len(questions_id):
-            return "Flask"
+        current_question += 1
+        if current_question >= len(questions_id):
+            current_question = 0
+            return "Тест закончен"
         else:
-            current_question_id = questions_id[quiz.get_current_question_index()]
-            current_question = db_sess.query(Question).filter(
+            current_question_id = questions_id[current_question]
+            question = db_sess.query(Question).filter(
                 Question.id == current_question_id).first()
-            question_answers = current_question.answers.split("~")
+            question_answers = question.answers.split("~")
+            if request.form["answer"].strip() == question.correct_answer.strip():
+                print("nice")
             return render_template('quiz.html',
-                                   number_of_question=quiz.get_current_question_index() + 1,
-                                   count_of_questions=len(questions_id), question=current_question,
+                                   number_of_question=current_question + 1,
+                                   count_of_questions=len(questions_id), question=question,
                                    answers=question_answers)
 
 
