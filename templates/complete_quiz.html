@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="complete_quiz">
+	<div class="complete_quiz__content">
+		<div class="complete_quiz__title">
+			Результаты
+		</div>
+		<div class="complete_quiz__correct__answers">
+			Правильных ответов: {{ corr_answers }} из {{ count_questions }}
+		</div>
+		<div class="complete_quiz__result">
+			Вы набрали {{corr_answers}} из {{count_questions}} баллов ({{percent}}%)
+		</div>
+		<div class="complete_quiz__thx">
+			Спасибо за игру!
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

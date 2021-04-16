@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="create_question_form">
+    <div class="create_question_form__content">
+        <div class="create_question_form__title">
+            <h1>Создание вопроса</h1>
+        </div>
+        <div class="create_question_form__form">
+            <form action="" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.question.label }}<br>
+                    {{ form.question(class="form-control") }}<br>
+                    {% for error in form.question.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+                <p>
+                	<div class="create_question_form__img">
+	                	<label for="photo">Фото</label>
+	    				<input type="file" class="form-control-file" id="photo" name="file">
+	    				{% for error in form.answers.errors %}
+	                        <p class="alert alert-danger" role="alert">
+	                            {{ error }}
+	                        </p>
+	                    {% endfor %}
+                	</div>	
+                </p>
+                <p>
+                    {{ form.answers.label }}<br>
+                    {{ form.answers(class="form-control",) }}<br>
+                    {% for error in form.answers.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.correct_answer.label }}<br>
+                    {{ form.correct_answer(class="form-control",) }}<br>
+                    {% for error in form.correct_answer.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit(type="submit", class="yellow__btn") }}</p>
+                {{message}}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

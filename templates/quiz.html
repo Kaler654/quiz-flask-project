@@ -16,15 +16,47 @@
 					<img src="{{ question.image }}" width="475px" height="475px">
 				</div>
 				<div class="main_block__answers__list">
-					{% for answer in answers %}
-					<div class="main_block__answer">
-						<input type="radio" name="answer" value="{{ answer }}">
-						<label>{{ answer }}</label>
-					</div>
-					{% endfor %}
+					{% if answer_index == 0 %}
+						{% for answer in answers %}
+						<div class="main_block__answer">
+							{% if loop.first %}
+								<input type="radio" name="answer" value="{{ answer }}" checked>
+							{% else %}
+								<input type="radio" name="answer" value="{{ answer }}">
+							{% endif %}
+							<label>{{ answer }}</label>
+						</div>
+						{% endfor %}
+					{% else %}
+						{% for answer in answers %}
+						<div class="main_block__answer">
+							{% if loop.index == answer_index and answer_index == corr_answer_index %}
+								<div class="main_block__answer__item input__green">
+									<input type="radio" name="answer" value="{{ answer }}" checked>
+									<label>{{ answer }}</label>
+								</div>
+							{% elif loop.index == answer_index and answer_index != corr_answer_index %}
+								<div class="main_block__answer__item input__red">
+									<input type="radio" name="answer" value="{{ answer }}" checked>
+									<label>{{ answer }}</label>
+								</div>
+							{% elif loop.index == corr_answer_index and answer_index != corr_answer_index %}
+								<div class="main_block__answer__item input__green">
+									<input type="radio" name="answer" value="{{ answer }}">
+									<label>{{ answer }}</label>
+								</div>
+							{% else %}
+								<div class="main_block__answer__item">
+									<input type="radio" name="answer" value="{{ answer }}" disabled>
+									<label>{{ answer }}</label>
+								</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 				<div class="main_block__btn">
-					<button class="yellow__btn" type="submit">Ответить</button>
+					<button class="yellow__btn" type="submit">{{ btn_text }}</button>
 				</div>
 			</form>
 		</div>

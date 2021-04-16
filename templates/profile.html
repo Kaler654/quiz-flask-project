@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile_block">
+	<div class="profile_block__content">
+		<div class="profile_block__user__name">Имя: {{ user.name }}</div>
+		<div class="profile_block__email">Почта: {{ user.email }}</div>
+		<div class="profile_block__btns">
+			<div class="profile_block__btn__pass yellow__btn">
+				<a href="/">Сменить пароль</a>
+			</div>
+			<div class="profile_block__btn__email yellow__btn">
+				<a href="/">Сменить почту</a>
+			</div>
+			<div class="profile_block__btn__quiz yellow__btn">
+				<a href="/create_question_info">Создать вопрос для квиза</a>
+			</div>
+
+			<div class="profile_block__btn__my_quests yellow__btn">
+				<a href="/create_question_info">Мои вопросы</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

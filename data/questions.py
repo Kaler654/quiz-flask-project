@@ -11,5 +11,6 @@ class Question(SqlAlchemyBase):
     image = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     answers = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     correct_answer = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    moderation = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
 
 
