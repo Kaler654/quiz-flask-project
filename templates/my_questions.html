@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="my_questions">
+	<div class="my_questions__content">
+		<div class="container">
+			<div class="my_questions__title">Мои вопросы для квизов</div>
+			<div class="my_questions__table">
+				<table class="my_questions__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Вопрос</th>
+				      <th>Статус вопроса</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for question in questions %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ question.question }}</td>
+				      		<td>{% if not question.moderation %} На модерации {% else %} Прошел модерацию {% endif %}</td>
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+	
+{% endblock %}

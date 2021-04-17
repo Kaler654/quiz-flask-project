@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="users">
+	<div class="users__content">
+		<div class="container">
+			<div class="users__title">Все пользователи</div>
+			<div class="users__table">
+				<table class="users__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Имя</th>
+				      <th>Почта</th>
+				      <th>Дата создания аккаунта</th>
+				      <th>Удалить</th>
+				      <th>Изменить</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for user in users %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ user[1] }}</td>
+				      		<td>{{ user[2] }}</td>
+				      		<td>{{ user[3] }}</td>
+				      		{% if user[0] != 1 %}
+					      		<td>
+					      			<div class="users__btn yellow__btn2">
+										<a href="/user_delete/{{ user[0] }}">🗑</a>
+									</div>
+					      		</td>
+					      		<td>
+					      			<div class="users__btn yellow__btn2">
+										<a href="/user_edit/{{ user[0] }}">✎</a>
+									</div>
+					      		</td>
+					      	{% else %}
+					      		<td>Администратор</td>
+					      		<td>Администратор</td>
+					      	{% endif %}
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

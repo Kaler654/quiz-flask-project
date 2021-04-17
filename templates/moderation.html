@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="moderation">
+	<div class="moderation__content">
+		<div class="container">
+			<div class="moderation__title">Модерация вопросов</div>
+			<div class="moderation__table">
+				<table class="moderation__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Вопрос</th>
+				      <th>Картинка</th>
+				      <th>Варианты ответов</th>
+				      <th>Правильный ответ</th>
+				      <th>Отклонить</th>
+				      <th>Одобрить</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for question in questions %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ question[1] }}</td>
+				      		<td>
+				      			<a class="moderation_img" href="{{ question[2] }}">Жмяк</a>
+				      		</td>
+				      		<td>{{ question[3] }}</td>
+				      		<td>{{ question[4] }}</td>
+				      		<td>
+				      			<div class="moderation__btn yellow__btn2">
+									<a href="/question_delete/{{ question[0] }}">❌</a>
+								</div>
+				      		</td>
+				      		<td>
+				      			<div class="moderation__btn yellow__btn2">
+									<a href="/question_approve/{{ question[0] }}">✅</a>
+								</div>
+				      		</td>
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

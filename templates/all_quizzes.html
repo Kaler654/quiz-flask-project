@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quizes">
+	<div class="quizes__content">
+		<div class="container">
+			<div class="quizes__title">Все квизы</div>
+			<div class="quizes__table">
+				<table class="quizes__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Название</th>
+				      <th>id вопросов</th>
+				      <th>Описание</th>
+				      <th>Сложность</th>
+				      <th>Время игры</th>
+				      <th>Дата создания</th>
+				      <th>Удалить</th>
+				      <th>Изменить</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for quiz in quizes %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ quiz[1] }}</td>
+				      		<td>{{ quiz[2] }}</td>
+				      		<td>{{ quiz[3] }}</td>
+				      		<td>{{ quiz[4] }}</td>
+				      		<td>{{ quiz[5] }}</td>
+				      		<td>{{ quiz[6] }}</td>
+				      		<td>
+				      			<div class="quizes__btn yellow__btn2">
+									<a href="/quiz_delete/{{ quiz[0] }}">🗑</a>
+								</div>
+				      		</td>
+				      		<td>
+				      			<div class="quizes__btn yellow__btn2">
+									<a href="/quiz_edit/{{ quiz[0] }}">✎</a>
+								</div>
+				      		</td>
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

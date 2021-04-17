@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="second_block"></div>
+	<div class="second_block__content quizzes__block">
+		<div class="container">
+			<div class="second_block__title quizzes__block__title">{{ title }}</div>
+			<div class="quizzes__block__description">{{ description }}</div>
+			<div class="second_block__quizes">
+				<div class="row justify-content-center">
+					{% for quiz in quizzes %}
+					  	<div class="second_block__quiz__wrap quizzes__block__wrap">
+					  	 	<div class="col-sm">
+						    	<div class="second_block__quiz__content">
+						    		<div class="alert">
+		  								<ul class="second_block__quiz__info">
+		  									<li class="second_block__quiz__info__item">		
+												{{ quiz[1] }}
+		  									</li>
+		  									<li class="second_block__quiz__info__item">	
+												{{ quiz[2] }}
+		  									</li>
+		  									<li class="second_block__quiz__info__item">		
+												Сложность: {{ quiz[3] }}	
+		  									</li>
+		  									<li class="second_block__quiz__info__item">	
+												Кол-во вопросов: {{ quiz[4] }}
+		  									</li>
+		  									<li class="second_block__quiz__info__item">		
+												Время игры: {{ quiz[5] }}	
+		  									</li>
+		  									<li class="second_block__quiz__info__item">
+												Дата добавления: {{ quiz[6] }}	
+		  									</li>
+		  								</ul>
+									</div>
+						    	</div>
+					    	</div>
+					    	<div class="second_block__quiz__btn">
+		  						<a class="yellow__btn" href="/quiz/{{quiz[0]}}" role="button">Играть</a>
+		  					</div>
+					  	</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

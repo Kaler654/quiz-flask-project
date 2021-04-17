@@ -7,18 +7,27 @@
 		<div class="profile_block__user__name">Имя: {{ user.name }}</div>
 		<div class="profile_block__email">Почта: {{ user.email }}</div>
 		<div class="profile_block__btns">
-			<div class="profile_block__btn__pass yellow__btn">
-				<a href="/">Сменить пароль</a>
+			{% if user.id == 1 %}
+				<div class="profile_block__btn__pass yellow__btn">
+					<a href="/admin_panel">Панель администратора</a>
+				</div>
+			{% endif %}
+			<div class="profile_block__btn__pass yellow__btn2">
+				<a href="/change_password">Сменить пароль</a>
 			</div>
-			<div class="profile_block__btn__email yellow__btn">
-				<a href="/">Сменить почту</a>
+			<div class="profile_block__btn__email yellow__btn2">
+				<a href="/change_email">Сменить почту</a>
 			</div>
-			<div class="profile_block__btn__quiz yellow__btn">
+			<div class="profile_block__btn__quiz yellow__btn2">
 				<a href="/create_question_info">Создать вопрос для квиза</a>
 			</div>
 
-			<div class="profile_block__btn__my_quests yellow__btn">
-				<a href="/create_question_info">Мои вопросы</a>
+			<div class="profile_block__btn__my_quests yellow__btn2">
+				<a href="/my_questions">Мои вопросы</a>
+			</div>
+
+			<div class="profile_block__btn__logout yellow__btn2">
+				<a href="/logout">Выйти</a>
 			</div>
 		</div>
 	</div>

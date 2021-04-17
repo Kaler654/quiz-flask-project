@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="edit_quiz">
+    <div class="edit_quiz__content">
+        <div class="edit_quiz__title">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="edit_quiz__form">
+            <form action="" method="post" class="">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.title.label }}<br>
+                    {{ form.title(class="form-control") }}<br>
+                    {% for error in form.title.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.questions.label }}<br>
+                    {{ form.questions(class="form-control") }}<br>
+                    {% for error in form.questions.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.description.label }}<br>
+                    {{ form.description(class="form-control") }}<br>
+                    {% for error in form.description.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.difficulty.label }}<br>
+                    {{ form.difficulty(class="form-control") }}<br>
+                    {% for error in form.difficulty.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.game_time.label }}<br>
+                    {{ form.game_time(class="form-control") }}<br>
+                    {% for error in form.game_time.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit(type="submit", class="yellow__btn") }}</p>
+                {{message}}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired
 
 class CreateQuestion(FlaskForm):
     question = StringField('Вопрос', validators=[DataRequired()])
-    answers = StringField('Варианты ответа(через запятую)', validators=[DataRequired()])
+    answers = StringField('Варианты ответа(через ~)', validators=[DataRequired()])
     correct_answer = StringField('Правильный вариант ответа', validators=[DataRequired()])
-    submit = SubmitField('Создать вопрос')
+    submit = SubmitField('Сохранить')

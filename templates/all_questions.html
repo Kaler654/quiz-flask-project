@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="questions">
+	<div class="questions__content">
+		<div class="container">
+			<div class="questions__title">Все вопросы</div>
+			<div class="questions__table">
+				<table class="questions__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Вопрос</th>
+				      <th>Картинка</th>
+				      <th>Варианты ответов</th>
+				      <th>Правильный ответ</th>
+				      <th>Статус</th>
+				      <th>Автор</th>
+				      <th>Удалить</th>
+				      <th>Изменить</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for question in questions %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ question[1] }}</td>
+				      		<td>
+				      			<a class="questions_img" href="{{ question[2] }}">Жмяк</a>
+				      		</td>
+				      		<td>{{ question[3] }}</td>
+				      		<td>{{ question[4] }}</td>
+				      		<td>{% if not question[5] %} На модерации {% else %} Прошел модерацию {% endif %}</td>
+				      		<td>{{ question[6] }}</td>
+				      		<td>
+								<div class="questions__btn yellow__btn2">
+									<a href="/question_delete/{{ question[0] }}">🗑</a>
+								</div>
+							</td>
+							<td>
+								<div class="questions__btn yellow__btn2">
+									<a href="/question_edit/{{ question[0] }}">✎</a>
+								</div>
+							</td>
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

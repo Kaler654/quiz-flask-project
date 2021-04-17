@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="admin_block">
+	<div class="admin_block__content">
+		<div class="profile_block__title">Панель администратора</div>
+		<div class="admin_block__btns">
+			<div class="profile_block__btn__users yellow__btn2">
+				<a href="/all_users">Все пользователи</a>
+			</div>
+
+			<div class="profile_block__btn__users yellow__btn2">
+				<a href="/all_quizzes">Все квизы</a>
+			</div>
+
+			<div class="profile_block__btn__users yellow__btn2">
+				<a href="/all_questions">Все вопросы</a>
+			</div>
+
+			<div class="profile_block__btn__moderation yellow__btn2">
+				<a href="/moderation">Модерация вопросов</a>
+			</div>
+
+			<div class="profile_block__btn__users yellow__btn2">
+				<a href="/create_quiz">Создать квиз</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

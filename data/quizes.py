@@ -15,20 +15,3 @@ class Quiz(SqlAlchemyBase):
     game_time = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
-
-    def __init__(self):
-        print(1111)
-        self.current_question = 0
-
-    def is_last_question(self):
-        if len(self.questions.split("~")) <= self.current_question:
-            return True
-        return False
-
-    def get_current_question_index(self):
-        return self.current_question
-
-    def get_next_question_index(self):
-        self.current_question += 1
-        print(f"class {self.current_question}")
-        return self.current_question

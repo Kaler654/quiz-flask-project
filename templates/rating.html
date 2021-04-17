@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="rating">
+	<div class="rating__content">
+		<div class="container">
+			<div class="rating__title">Рейтинг пользователей</div>
+			<div class="rating__table">
+				<table class="rating__table table">
+				  <thead>
+				    <tr>
+				      <th>№</th>
+				      <th>Имя</th>
+				      <th>Пройденных квизов</th>
+				      <th>Всего баллов</th>
+				      <th>Средний балл</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for user in users %}
+				  		<tr>
+				      		<th scope="row">{{ loop.index }}</th>
+				      		<td>{{ user[0] }}</td>
+				      		<td>{{ user[1] }}</td>
+				      		<td>{{ user[2] }}</td>
+				      		<td>{{ user[3] }}</td>
+				    	</tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
