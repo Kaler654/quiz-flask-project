@@ -42,7 +42,7 @@
 								</div>
 							{% elif loop.index == corr_answer_index and answer_index != corr_answer_index %}
 								<div class="main_block__answer__item input__green">
-									<input type="radio" name="answer" value="{{ answer }}">
+									<input type="radio" name="answer" value="{{ answer }}" disabled>
 									<label>{{ answer }}</label>
 								</div>
 							{% else %}

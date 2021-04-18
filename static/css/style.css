@@ -278,6 +278,7 @@ footer a {
 
 .second_block__quiz__content {
 	background-color: #3749e9;
+	height: 330px;
 }
 
 .second_block__push__message {
@@ -363,9 +364,11 @@ footer a {
 	box-shadow: inset 0 0 0 3px #FFE400;
 }
 
-.form__btns {
-
+.navbar__margin {
+	margin-left: 166px;
 }
+
+
 
 /*user_name*/
 
@@ -1036,4 +1039,29 @@ footer a {
 	color: #ffffff;
 	font-size: 24px;
 	margin-bottom: 50px;
+}
+
+
+/* 404 error */
+
+
+.not_found {
+	padding-top: 300px;
+	text-align: center;
+}
+
+.not_found__content {
+	margin-bottom: 50%;
+	text-align: center;
+	display: inline-block;
+}
+
+.not_found__btn a {
+	color: #000000;
+}
+
+.not_found__title {
+	font-size: 64px;
+	color: #ffffff;
+	margin-bottom: 200px;
 }

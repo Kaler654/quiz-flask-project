@@ -16,7 +16,7 @@ import os
 import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config['SECRET_KEY'] = 'N#pC@UzmS5kw%@$F'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(
     days=365
 )
@@ -91,6 +91,7 @@ def add_user_info(correct_answers, quiz):
     db_sess = db_session.create_session()
     user_passed_quizzes = db_sess.query(Statistic).filter(Statistic.user == current_user.id,
                                                           Statistic.quiz == quiz.id).all()
+    print(user_passed_quizzes)
     if len(user_passed_quizzes) == 0:
         statistic = Statistic(
             user=current_user.id,
@@ -126,6 +127,7 @@ def quiz(id):
     except IndexError:
         quiz_stage = True
         current_question = 0
+        add_user_info(count_corr_answers, quiz)
         percent = round(count_corr_answers / len(questions_id) * 100, 1)
         return render_template("complete_quiz.html", corr_answers=count_corr_answers,
                                count_questions=len(questions_id), percent=percent)
@@ -507,6 +509,55 @@ def quizzes():
                              quiz.created_date.strftime("%d.%m.%Y")))
     return render_template('quizzes.html', quizzes=quizzes_info, title="Все квизы",
                            description="Полный набор наших квизов")
+
+
+@app.route("/movie")
+def movie():
+    quizzes_info = []
+    db_sess = db_session.create_session()
+    quizzes = db_sess.query(Quiz).filter(Quiz.title.like("%Кино%"))
+    for quiz in quizzes:
+        quizzes_info.append((quiz.id, quiz.title, quiz.description, quiz.difficulty,
+                             len(quiz.questions.split("~")), quiz.game_time,
+                             quiz.created_date.strftime("%d.%m.%Y")))
+    return render_template('quizzes.html', quizzes=quizzes_info, title="Кино",
+                           description="Подборка викторин с вопросами про кино")
+
+
+@app.route("/thematic")
+def thematic():
+    quizzes_info = []
+    db_sess = db_session.create_session()
+    quizzes = db_sess.query(Quiz).filter(Quiz.title.like("%Тематическая%"))
+    for quiz in quizzes:
+        quizzes_info.append((quiz.id, quiz.title, quiz.description, quiz.difficulty,
+                             len(quiz.questions.split("~")), quiz.game_time,
+                             quiz.created_date.strftime("%d.%m.%Y")))
+    return render_template('quizzes.html', quizzes=quizzes_info, title="Тематические",
+                           description="Викторины с вопросами на различные темы")
+
+
+@app.route("/logic")
+def logic():
+    quizzes_info = []
+    db_sess = db_session.create_session()
+    quizzes = db_sess.query(Quiz).filter(Quiz.title.like("%Логика%"))
+    for quiz in quizzes:
+        quizzes_info.append((quiz.id, quiz.title, quiz.description, quiz.difficulty,
+                             len(quiz.questions.split("~")), quiz.game_time,
+                             quiz.created_date.strftime("%d.%m.%Y")))
+    return render_template('quizzes.html', quizzes=quizzes_info, title="Логика",
+                           description="Викторины с вопросами на логику")
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template("errors/404.html")
+
+
+@app.errorhandler(401)
+def not_found(error):
+    return redirect("/login")
 
 
 @app.route('/logout')
