@@ -28,6 +28,15 @@
                         </p>
                     {% endfor %}
                 </p>
+                <p>
+                    {{ form.status.label }}<br>
+                    {{ form.status(class="form-control") }}<br>
+                    {% for error in form.status.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
                 <p>{{ form.submit(type="submit", class="yellow__btn") }}</p>
                 {{message}}
             </form>

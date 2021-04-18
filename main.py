@@ -64,6 +64,7 @@ def reqister():
         user = User(
             name=form.name.data,
             email=form.email.data,
+            status="Пользователь",
         )
         user.set_password(form.password.data)
         db_sess.add(user)
@@ -91,7 +92,6 @@ def add_user_info(correct_answers, quiz):
     db_sess = db_session.create_session()
     user_passed_quizzes = db_sess.query(Statistic).filter(Statistic.user == current_user.id,
                                                           Statistic.quiz == quiz.id).all()
-    print(user_passed_quizzes)
     if len(user_passed_quizzes) == 0:
         statistic = Statistic(
             user=current_user.id,
@@ -268,20 +268,21 @@ def rating():
 @app.route('/admin_panel')
 @login_required
 def admin():
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         return render_template("admin.html")
     abort(404)
 
 
 @app.route('/all_users')
 def all_users():
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         users_info = []
         db_sess = db_session.create_session()
         users = db_sess.query(User).all()
         for user in users:
             users_info.append(
-                (user.id, user.name, user.email, user.created_date.strftime("%d.%m.%Y")))
+                (
+                user.id, user.name, user.email, user.status, user.created_date.strftime("%d.%m.%Y")))
         return render_template("users.html", users=users_info, current_user=current_user)
     abort(404)
 
@@ -289,7 +290,7 @@ def all_users():
 @app.route('/user_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def user_delete(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         if id != 1:
             db_sess = db_session.create_session()
             user = db_sess.query(User).filter(User.id == id).first()
@@ -305,7 +306,7 @@ def user_delete(id):
 @app.route('/user_edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def user_edit(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         if id != 1:
             form = EditUserForm()
             if request.method == "GET":
@@ -314,6 +315,7 @@ def user_edit(id):
                 if user:
                     form.name.data = user.name
                     form.email.data = user.email
+                    form.status.data = user.status
                 else:
                     abort(404)
             if form.validate_on_submit():
@@ -322,18 +324,19 @@ def user_edit(id):
                 if user:
                     user.name = form.name.data
                     user.email = form.email.data
+                    user.status = form.status.data
                     db_sess.commit()
                     return redirect('/all_users')
                 else:
                     abort(404)
-            return render_template('edit_user.html', form=form)
+            return render_template('edit_user.html', form=form, current_user=current_user)
     abort(404)
 
 
 @app.route('/moderation')
 @login_required
 def moderation():
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         questions_info = []
         db_sess = db_session.create_session()
         questions = db_sess.query(Question).filter(Question.moderation == 0)
@@ -347,7 +350,7 @@ def moderation():
 @app.route('/question_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def question_delete(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         db_sess = db_session.create_session()
         question = db_sess.query(Question).filter(Question.id == id).first()
         if question:
@@ -361,7 +364,7 @@ def question_delete(id):
 @app.route('/question_edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def question_edit(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         form = CreateQuestion()
         if request.method == "GET":
             db_sess = db_session.create_session()
@@ -395,7 +398,7 @@ def question_edit(id):
 @app.route('/question_approve/<int:id>', methods=['GET', 'POST'])
 @login_required
 def question_approve(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         db_sess = db_session.create_session()
         question = db_sess.query(Question).filter(Question.id == id).first()
         if question:
@@ -407,7 +410,7 @@ def question_approve(id):
 
 @app.route('/all_quizzes')
 def all_quizzes():
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         quizzes_info = []
         db_sess = db_session.create_session()
         quizzes = db_sess.query(Quiz).all()
@@ -422,7 +425,7 @@ def all_quizzes():
 @app.route('/quiz_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def quiz_delete(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         db_sess = db_session.create_session()
         quiz = db_sess.query(Quiz).filter(Quiz.id == id).first()
         if quiz:
@@ -435,7 +438,7 @@ def quiz_delete(id):
 @app.route('/quiz_edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def quiz_edit(id):
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         form = QuizForm()
         if request.method == "GET":
             db_sess = db_session.create_session()
@@ -467,7 +470,7 @@ def quiz_edit(id):
 
 @app.route('/all_questions')
 def all_questions():
-    if current_user.id == 1:
+    if current_user.id == 1 or current_user.status == "Администратор":
         questions_info = []
         db_sess = db_session.create_session()
         questions = db_sess.query(Question).all()
@@ -569,8 +572,9 @@ def logout():
 
 def main():
     db_session.global_init("db/data.db")
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    # port = int(os.environ.get("PORT", 5000))
+    # app.run(host='0.0.0.0', port=port)
+    app.run()
 
 
 if __name__ == '__main__':
