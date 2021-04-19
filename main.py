@@ -30,9 +30,9 @@ def main():
     # Регистрация методов API
     app.register_blueprint(quiz_api.blueprint)
     app.register_blueprint(question_api.blueprint)
-    # port = int(os.environ.get("PORT", 5000))
-    # app.run(host='0.0.0.0', port=port)
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+    # app.run()
 
 
 if __name__ == '__main__':
