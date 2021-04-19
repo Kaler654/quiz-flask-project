@@ -5,5 +5,6 @@ from wtforms.validators import DataRequired
 
 
 class ChangeEmailForm(FlaskForm):
+    """Форма изменения почты"""
     email = EmailField('Почта', validators=[DataRequired()])
     submit = SubmitField('Сменить почту')

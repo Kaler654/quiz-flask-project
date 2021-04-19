@@ -1,9 +1,11 @@
 import sqlalchemy
 from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
-class Question(SqlAlchemyBase):
+class Question(SqlAlchemyBase, SerializerMixin):
+    """Модель вопроса для работы с БД"""
     __tablename__ = 'questions'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

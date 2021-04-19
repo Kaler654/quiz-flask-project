@@ -1,9 +1,11 @@
 import datetime
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
-class Quiz(SqlAlchemyBase):
+class Quiz(SqlAlchemyBase, SerializerMixin):
+    """Модель квиза для работы с БД"""
     __tablename__ = 'quizes'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

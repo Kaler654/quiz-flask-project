@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired
 
 
 class QuizForm(FlaskForm):
+    """Форма создания квиза"""
     title = StringField('Название', validators=[DataRequired()])
     questions = StringField('id вопросов(через запятую)', validators=[DataRequired()])
     description = StringField('Описание', validators=[DataRequired()])

@@ -9,6 +9,7 @@ __factory = None
 
 
 def global_init(db_file):
+    """Начальная инициализация БД"""
     global __factory
 
     if __factory:
@@ -29,5 +30,6 @@ def global_init(db_file):
 
 
 def create_session() -> Session:
+    """Получение сессии подключения к БД"""
     global __factory
     return __factory()

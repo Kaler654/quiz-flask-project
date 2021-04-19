@@ -4,6 +4,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Statistic(SqlAlchemyBase):
+    """Модель статистики для работы с БД"""
     __tablename__ = 'statistic'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

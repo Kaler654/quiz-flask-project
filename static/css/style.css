@@ -123,6 +123,11 @@ footer a {
 	color: #ffffff;
 }
 
+.footer__yandex:hover {
+	color: white;
+	text-decoration: underline;
+}
+
 /*first_block*/
 
 
@@ -388,7 +393,7 @@ footer a {
 
 .main_block {
 	padding-top: 225px;
-	margin-bottom: 350px;
+	margin-bottom: 50%;
 }
 
 .main_block__content {
@@ -602,7 +607,7 @@ footer a {
 
 .change_pass_form {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%
 }
 
 .change_pass_form__content {
@@ -631,7 +636,7 @@ footer a {
 
 .change_email_form {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .change_email_form__content {
@@ -805,7 +810,7 @@ footer a {
 
 .edit_user {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .edit_user__content {
@@ -938,7 +943,7 @@ footer a {
 
 .edit_quiz {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .edit_quiz__content {
