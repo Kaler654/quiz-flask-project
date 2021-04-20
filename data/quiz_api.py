@@ -3,6 +3,7 @@ from flask import jsonify
 from . import db_session
 from .quizes import Quiz
 
+# Создание схемы
 blueprint = flask.Blueprint(
     'quiz_api',
     __name__,
