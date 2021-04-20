@@ -297,7 +297,7 @@ footer a {
 
 .register_form {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .register_form__content {
@@ -325,7 +325,7 @@ footer a {
 
 .login_form {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .login_form__content {
@@ -574,7 +574,7 @@ footer a {
 
 .create_question_form {
 	padding-top: 175px;
-	margin-bottom: 300px;
+	margin-bottom: 50%;
 }
 
 .create_question_form__content {
